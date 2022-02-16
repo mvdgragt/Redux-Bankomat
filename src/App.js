@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import ATM from './components/ATM'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
 
 function App() {
+  const [showATM, setShowATM] = useState(true)
+
+  const handleShowATM = () => {
+    return setShowATM(!showATM)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav className="navbar navbar-dark bg-dark">
+        <span className="navbar-brand mb-0 h1">Navbar</span>
+        {!showATM && (
+          <button className="btn btn-light startATMButton" onClick={handleShowATM}>
+            {showATM ? 'Start ATM' : 'Close ATM'}
+          </button>
+        )}
+      </nav>
+      {!showATM && <ATM />}
+      {showATM && (
+        <div className="row headerText">
+          <div className="w-auto mx-auto">
+            <h1>React Bankomat</h1>
+            <button className="btn btn-dark startATMButton" onClick={handleShowATM}>
+              {showATM ? 'Start ATM' : 'Close ATM'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
